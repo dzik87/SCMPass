@@ -118,6 +118,10 @@ int main()
 	// Generate password
   	GetFunc1_GenPassword(nXor, nKey, nModule, 0, numArray, sizeof(numArray));
 
+	// Restore original function
+	byte orig[6] = { 0x55, 0x8B, 0xEC, 0x81, 0xEC, 0x08 };
+	WriteBytes((LPVOID)(getKey1 + 0), &orig, 6);
+
 	// Copy password to clipboard
 	SaveClipboard((char*)&numArray);
 
